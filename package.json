@@ -1,0 +1,24 @@
+{
+  "name": "Ticket-System",
+  "version": "1.0.0",
+  "description": "IT help desk ticket system that allows people to submit tickets for things such as account help and repair requests.",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "cd backend && npm install",
+    "start-server": "cd backend && node app.js",
+    "install-client": "cd client && npm install",
+    "build-client": "cd client && npm run build",
+    "start-client": "cd client && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaksimArtemev/Ticket-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaksimArtemev/Ticket-System/issues"
+  },
+  "homepage": "https://github.com/MaksimArtemev/Ticket-System#readme"
+}

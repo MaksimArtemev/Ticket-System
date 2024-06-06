@@ -30,3 +30,29 @@ System should be dynamic and responsive
 
 
 ### Installation
+#### *Full MERN set up and deployment to Render*
++ Create backend folder - mkdir server
++ Install dependencies - npm install express mongoose dotenv cors
++ Create .env file
++ Create app.js
++ Add MongoDB database URI
+##### + Setting-up Frontend
++ go to root directory - cd ..
++  initialze ReactJS boilerplate - npx create-react-app client
+    + npm start
+      + Starts the development server.
+   + npm start
+     + Starts the development server.
+   + npm run build
+     + Bundles the app into static files for production.
+   + npm test
+     + Starts the test runner.
+   + npm run eject
+     + Removes this tool and copies build dependencies, configuration files
+       and scripts into the app directory. If you do this, you can’t go back!
++ inside the App.js file make a fetch request to the backend to show the message
++ Delete the .git folder inside the client folder to prevent any conflicts during the deployment process, also delete .gitignore
+###### + Setting-up Root folder for Deployment 
++ Create package.json file for the root folder - npm init -y
++ Create a .gitignore to not push all created dependencies and libraries
++ 

@@ -55,4 +55,14 @@ System should be dynamic and responsive
 ###### + Setting-up Root folder for Deployment 
 + Create package.json file for the root folder - npm init -y
 + Create a .gitignore to not push all created dependencies and libraries
++ add scripts to package.json to install our server and client dependencies, start our server and client separately, and build our client for deployment
+
+##### Deploy to Render 
++ "New" -> "Web service"
++ Runtime: Node
++ Build Command: npm run install-server
++ Start Command: npm run start-server
++ Open Advanced option, and add environment variables.
++ Click on "Create Web Service" to deploy your backend.
++ Add Backend URL to Frontend to client/App.js file
 + 

@@ -71,4 +71,4 @@ System should be dynamic and responsive
 + Runtime: Node
 + Build Command: npm run install-client && npm run build-client
 + Publish directory: ./client/build
-+ Add Frontend URL to Backend to  backend/app.js
++ Add Frontend URL to Backend to backend/app.js

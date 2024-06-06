@@ -65,4 +65,10 @@ System should be dynamic and responsive
 + Open Advanced option, and add environment variables.
 + Click on "Create Web Service" to deploy your backend.
 + Add Backend URL to Frontend to client/App.js file
-+ 
+
+##### Deploy Frontend
++ "New" -> "Static Site"
++ Runtime: Node
++ Build Command: npm run install-client && npm run build-client
++ Publish directory: ./client/build
++ Add Frontend URL to Backend to  backend/app.js

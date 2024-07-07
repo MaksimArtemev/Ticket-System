@@ -7,7 +7,7 @@ function App() {
 
   // Fetching message from backend on mount
   useEffect(() => {
-    fetch("https://ticket-system-xl4u.onrender.com")
+    fetch("https://ticket-system-xl4u.onrender.com")//"https://ticket-system-xl4u.onrender.com"// back-end
         .then((res) => res.json())
         .then((data) => setMessage(data.message));
   }, []);

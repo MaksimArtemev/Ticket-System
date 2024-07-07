@@ -1,7 +1,7 @@
 {
   "name": "Ticket-System",
   "version": "1.0.0",
-  "description": "IT help desk ticket system that allows people to submit tickets for things such as account help and repair requests.",
+  "description": "IT help desk ticket system that allows people to submit tickets for things such as account help and repair requests",
   "main": "index.js",
   "scripts": {
     "install-server": "cd server && npm install",

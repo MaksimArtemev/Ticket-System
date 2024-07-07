@@ -6,7 +6,7 @@ require("dotenv").config();
 
 // middleware
 const corsOptions = {
-    origin: "https://ticket-system-front-end.onrender.com" // frontend URI (ReactJS)
+    origin: "https://ticket-system-front-end.onrender.com"//"http://localhost:3000" //"https://ticket-system-front-end.onrender.com" // frontend URI (ReactJS) //
 }
 app.use(express.json());
 app.use(cors(corsOptions));

@@ -7,7 +7,7 @@ function App() {
 
   // Fetching message from backend on mount
   useEffect(() => {
-    fetch("https://ticket-system-back-end.onrender.com")
+    fetch("https://ticket-system-back-end.onrender.com")//"https://ticket-system-xl4u.onrender.com"// back-end
         .then((res) => res.json())
         .then((data) => setMessage(data.message));
   }, []);
@@ -16,11 +16,12 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          GO team MAANGo 🥭
-          Let's make a super cool Ticket-System app! cheeeeeeck
-        </p>
-        {/* <p>
+          <p>
+              GO team MAANGo 🥭
+              Let's make a super cool Ticket-System app! cheeeeeeck
+              <h1>{message}</h1>
+          </p>
+          {/* <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a

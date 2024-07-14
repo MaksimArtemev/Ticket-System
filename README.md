@@ -50,7 +50,7 @@ System should be dynamic and responsive
    + npm run eject
      + Removes this tool and copies build dependencies, configuration files
        and scripts into the app directory. If you do this, you can’t go back!
-+ inside the App.js file make a fetch request to the backend to show the message
++ inside the App.jsx file make a fetch request to the backend to show the message
 + Delete the .git folder inside the client folder to prevent any conflicts during the deployment process, also delete .gitignore
 ###### + Setting-up Root folder for Deployment 
 + Create package.json file for the root folder - npm init -y
@@ -64,7 +64,7 @@ System should be dynamic and responsive
 + Start Command: npm run start-server
 + Open Advanced option, and add environment variables.
 + Click on "Create Web Service" to deploy your backend.
-+ Add Backend URL to Frontend to client/App.js file
++ Add Backend URL to Frontend to client/App.jsx file
 
 ##### Deploy Frontend
 + "New" -> "Static Site"

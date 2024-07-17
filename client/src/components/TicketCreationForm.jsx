@@ -26,9 +26,9 @@ export default function TicketCreationForm({visible, onClose}) {
           <div className="flex justify-end">
             <button id="close-modal-container" onClick={onClose}>X</button>
           </div>
-          <form action="#" className="w-full ">
+          <form action="#" className="w-full">
             <p className="mb-4">Please select which type of issue you are experiencing.</p>
-            <div className="grid gap-10 grid-cols-3 grid-rows-1 text-xs mb-6 mx-auto text-center w-4/5 ">
+            <div className="grid gap-10 grid-cols-3 grid-rows-1 text-xs mb-6 mx-auto text-center w-5/6 ">
 
               {/* {ticketTopics.map( (topic) => {
                 <div onClick={() => setSelectedTopic(topic.topic)} className="col-span-1" >
@@ -75,23 +75,25 @@ export default function TicketCreationForm({visible, onClose}) {
               </div>
             </div>
             <hr />
-              <div className="py-2">
-              <label htmlFor="subject" className="block my-2">Subject</label>
-              <input type="text" required name="subject" id="ticketSubject" className="flex items-center h-12 px-4 w-2/3 bg-gray-200 mt-2 rounded-md focus:outline-none focus:ring-2" placeholder="Give your issue a meaningful subject"/>
+              <div className="my-6">
+              <label htmlFor="subject" className="block mb-2">Subject</label>
+              <input type="text" required name="subject" id="ticketSubject" className="flex items-center h-12 px-4 w-2/3 bg-gray-200 rounded-md focus:outline-none focus:ring-2" placeholder="Give your issue a meaningful subject"/>
               </div>
 
-              <div className="py-2">
-              <label htmlFor="description" className="block my-2">Description</label>
-              <textarea name="description" required id="ticketDesc" placeholder="Describe the issue you are having in detail" className="flex items-center h-36 p-4 w-full bg-gray-200 mt-2 rounded-md focus:outline-none focus:ring-2"></textarea>
+              <div className="my-6">
+              <label htmlFor="description" className="block mb-2">Description</label>
+              <textarea name="description" required id="ticketDesc" placeholder="Describe the issue you are having in detail" className="flex items-center h-36 p-4 w-full bg-gray-200 rounded-md focus:outline-none focus:ring-2"></textarea>
               </div>
-
-              <label htmlFor="userPictures" className="block my-2">Please upload any screenshots or pictures of your issue that may help us</label>
-              <div className="border border-black border-dashed rounded-md h-48 flex justify-center place-items-center bg-gray-200 text-center relative">
-                <input type="file" multiple className="opacity-0 w-full h-full z-50" name="userPictures"/>
-                <div className="absolute text-xs">
-                  <p>drag and drop your files here <br /> or <br /> select files from your device</p>
+              
+              <div className="my-6">
+                <label htmlFor="userPictures" className="block mb-2">Please upload any screenshots or pictures of your issue that may help us</label>
+                <div className="outline-1 outline-black outline-dashed rounded-md h-48 flex justify-center place-items-center bg-gray-200 text-center relative">
+                  <input type="file" multiple className="opacity-0 w-full h-full z-50" name="userPictures"/>
+                    <p className="absolute text-xs">drag and drop your files here <br /> or <br /> select files from your device</p>
                 </div>
               </div>
+
+              
 
               <div className="flex justify-center mt-8">
                 <button type="submit" className="bg-green-600 rounded-2xl w-20 mt-2 pb-0.5">submit</button>

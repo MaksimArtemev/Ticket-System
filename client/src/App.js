@@ -12,7 +12,7 @@ import searchImg from './assets/Search.png';
 import chartImg from './assets/Chart.png';
 import folderImg from './assets/Folder.png';
 import settingImg from './assets/Setting.png';
-import TicketCreationModal from './components/TicketCreateModal';
+import TicketCreationForm from './components/TicketCreationForm';
 import plusImg from './assets/plus.png';
 
 function HomePage() {
@@ -103,7 +103,7 @@ function MainPage() {
             <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Main Page</h1>
             </div>
-            <TicketCreationModal onClose={handleModalClose} visible={showModal}/>
+            <TicketCreationForm onClose={handleModalClose} visible={showModal}/>
         </div>
         
     );

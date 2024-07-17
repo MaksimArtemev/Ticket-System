@@ -12,6 +12,7 @@ import searchImg from './assets/Search.png';
 import chartImg from './assets/Chart.png';
 import folderImg from './assets/Folder.png';
 import settingImg from './assets/Setting.png';
+import TicketCreationModal from './components/TicketCreateModal';
 
 function HomePage() {
     const [message, setMessage] = useState('');
@@ -27,7 +28,7 @@ function HomePage() {
         navigate('/main');
     }
     return (
-        <div className="App">
+        <div className="App flex-1 h-screen">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
                 <p>
@@ -37,12 +38,18 @@ function HomePage() {
                 <h1>{message}</h1>
                 <button onClick={goToMainPage}>Go to About Page</button>
             </header>
+
+
         </div>
     );
 }
 
 function MainPage() {
     const [open, setOpen] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const handleModalClose = (e) => {
+        if(e.target.id === "close-modal-container") setShowModal(false)
+    }
     const Menus = [
         { title: "Dashboard", src: chartFillImg },
         { title: "Messages", src: chatImg },
@@ -92,8 +99,11 @@ function MainPage() {
             </div>
             <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Main Page</h1>
+                <button className="bg-red-600 rounded" onClick={()=> setShowModal(true)}>create ticket</button>
             </div>
+            <TicketCreationModal onClose={handleModalClose} visible={showModal}/>
         </div>
+        
     );
 }
 

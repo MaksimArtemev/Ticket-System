@@ -1,4 +1,28 @@
 # Ticket-System
+
+## How to setup
+
+You must have docker
+https://docs.docker.com/engine/install/
+
+You need make too. Here is for windows
+
+https://sourceforge.net/projects/gnuwin32/files/make/3.81/make-3.81.exe/
+
+```bash
+# you should be standing in Ticket-System, the top-most directory
+# for the frontend:
+make
+# in another terminal,
+# for the backend:
+cd server
+make
+# in another terminal,
+# for the database:
+cd ../db
+make
+```
+
 ### """ Netlify, Vercel, Render as hosting platforms???   """
 IT help desk ticket system that allows people to submit tickets for things such as account help and repair requests.
 

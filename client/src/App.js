@@ -13,6 +13,7 @@ import chartImg from './assets/Chart.png';
 import folderImg from './assets/Folder.png';
 import settingImg from './assets/Setting.png';
 import TicketCreationModal from './components/TicketCreateModal';
+import plusImg from './assets/plus.png';
 
 function HomePage() {
     const [message, setMessage] = useState('');
@@ -50,6 +51,7 @@ function MainPage() {
     const handleModalClose = (e) => {
         if(e.target.id === "close-modal-container") setShowModal(false)
     }
+    const createTicketButton = <button onClick={()=> setShowModal(true)}>create ticket</button>
     const Menus = [
         { title: "Dashboard", src: chartFillImg },
         { title: "Messages", src: chatImg },
@@ -59,6 +61,7 @@ function MainPage() {
         { title: "Ticket Analitics", src: chartImg },
         { title: "Files ", src: folderImg, gap: true },
         { title: "Setting", src: settingImg },
+        { title: createTicketButton, src: plusImg}
     ];
 
     return (
@@ -99,7 +102,6 @@ function MainPage() {
             </div>
             <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Main Page</h1>
-                <button className="bg-red-600 rounded" onClick={()=> setShowModal(true)}>create ticket</button>
             </div>
             <TicketCreationModal onClose={handleModalClose} visible={showModal}/>
         </div>

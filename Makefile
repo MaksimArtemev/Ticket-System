@@ -3,6 +3,7 @@ make:
 	-docker rm ticketsystem
 	docker build -t ticketsystem .
 	docker run --name ticketsystem -d \
+		-v ${CURDIR}:/usr/src/app \
 		-p 3000:3000 \
 		--restart=always \
 		ticketsystem

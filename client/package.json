@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.11.0",
     "postcss": "^8.4.39",
     "postcss-loader": "^6.2.1",

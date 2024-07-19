@@ -36,3 +36,102 @@
     transform: rotate(360deg);
   }
 }
+
+/* MessagePage */ 
+
+
+.shiny-background {
+  background: linear-gradient(135deg, #d3d3d3 25%, #e6e6e6 50%, #d3d3d3 75%);
+  background-size: 400% 400%;
+  animation: shine 1.5s infinite;
+  
+  min-height: 100vh;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.table-container {
+  background-color: #1c1c1e;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #007FFF;
+  color: #fff;
+  background-color: #0a2351; /* Ensure table cells have the desired background color */
+}
+
+.table th {
+  background-color: #0a2351;
+}
+
+.table tr:hover {
+  color: #0a2351;
+}
+
+.message-box {
+  background-color: #0a2351;  /* Match header background color */
+  color: #fff;  /* Match header text color */
+  text-align: center;
+  font-weight: bold;  /* Match font weight */
+  font-size: 1rem;  /* Match font size */
+  padding: 12px;  /* Ensure consistent padding */
+  font-family: 'Libre Baskerville', serif;
+}
+
+/* Style for the input box */
+input[type="text"] {
+  background-color: #ffffff; /* White background */
+  color: #000000; /* Black text */
+  border: 1px solid #007FFF; /* Blue border */
+  padding: 8px; /* Padding for better spacing */
+  border-radius: 4px; /* Slightly rounded corners */
+  font-size: 16px; /* Adjust font size */
+  width: 100%; /* Full width */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+input[type="text"]:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+  border-color: #005BBB; /* Darker blue border on hover */
+}
+
+input[type="text"]:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #005BBB; /* Darker blue border on focus */
+  box-shadow: 0 0 5px rgba(0, 91, 187, 0.5); /* Add shadow on focus */
+}
+
+button {
+  background-color: #696969; /* Background color */
+  color: #ffffff; /* White text */
+
+  padding: 10px 20px; /* Padding for better spacing */
+  border-radius: 4px; /* Slightly rounded corners */
+  font-size: 16px; /* Adjust font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for the Send button */
+button:hover {
+  background-color: #555555;
+}

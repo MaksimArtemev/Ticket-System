@@ -12,6 +12,7 @@ import searchImg from './assets/Search.png';
 import chartImg from './assets/Chart.png';
 import folderImg from './assets/Folder.png';
 import settingImg from './assets/Setting.png';
+import MessagesPage from './MessagesPage';
 
 function HomePage() {
     const [message, setMessage] = useState('');
@@ -31,7 +32,7 @@ function HomePage() {
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
                 <p>
-                    GO team MAANGo 🥭
+                    epic GO team MAANGo 🥭
                     Let's make a super cool Ticket-System app! 1 2 3
                 </p>
                 <h1>{message}</h1>
@@ -43,22 +44,21 @@ function HomePage() {
 
 function MainPage() {
     const [open, setOpen] = useState(true);
+    const navigate = useNavigate(); // Hook for navigation
     const Menus = [
-        { title: "Dashboard", src: chartFillImg },
-        { title: "Messages", src: chatImg },
-        { title: "User", src: userImg, gap: true },
-        { title: "Tickets in Calendar ", src: calendarImg },
-        { title: "Search", src: searchImg },
-        { title: "Ticket Analitics", src: chartImg },
-        { title: "Files ", src: folderImg, gap: true },
-        { title: "Setting", src: settingImg },
+        { title: "Dashboard", src: chartFillImg, path: "/main" },
+        { title: "Messages", src: chatImg, path: "/messages" },
+        { title: "User", src: userImg, gap: true, path: "/user" },
+        { title: "Tickets in Calendar ", src: calendarImg, path: "/calendar" },
+        { title: "Search", src: searchImg, path: "/search" },
+        { title: "Ticket Analytics", src: chartImg, path: "/analytics" },
+        { title: "Files ", src: folderImg, gap: true, path: "/files" },
+        { title: "Setting", src: settingImg, path: "/setting" },
     ];
 
     return (
         <div className="flex">
-            <div
-                className={` ${open ? "w-72" : "w-20 "} bg-dark-purple h-screen p-5  pt-8 relative duration-300`}
-            >
+            <div className={` ${open ? "w-72" : "w-20 "} bg-dark-purple h-screen p-5  pt-8 relative duration-300`}>
                 <img
                     src={controlImg}
                     className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple border-2 rounded-full  ${!open && "rotate-180"}`}
@@ -69,9 +69,7 @@ function MainPage() {
                         src={logoImg}
                         className={`cursor-pointer duration-500 ${ open && "rotate-[360deg]"} `}
                     />
-                    <h1
-                        className={`text-white origin-left font-medium text-xl duration-200 ${!open && "scale-0"}`}
-                    >
+                    <h1 className={`text-white origin-left font-medium text-xl duration-200 ${!open && "scale-0"}`}>
                         User/Admin
                     </h1>
                 </div>
@@ -79,8 +77,9 @@ function MainPage() {
                     {Menus.map((Menu, index) => (
                         <li
                             key={index}
-                            className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
+                            className={`flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
                                 ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 && "bg-light-white"} `}
+                            onClick={() => navigate(Menu.path)} // Navigate to the path on click
                         >
                             <img src={Menu.src} />
                             <span className={`${!open && "hidden"} origin-left duration-200`}>
@@ -96,13 +95,14 @@ function MainPage() {
         </div>
     );
 }
-
+ // ROUTER
 function App() {
     return (
         <Router>
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/main" element={<MainPage />} />
+                <Route path="/messages" element={<MessagesPage />} /> 
             </Routes>
         </Router>
     );

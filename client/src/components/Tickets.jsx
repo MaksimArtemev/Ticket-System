@@ -1,0 +1,12 @@
+import React, {useState} from 'react';
+const Tickets = () => {
+    return (
+        <div>
+            <p>
+                hello
+            </p>
+        </div>
+    );
+};
+
+export default Tickets;

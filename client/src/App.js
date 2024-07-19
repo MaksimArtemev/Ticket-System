@@ -12,8 +12,9 @@ import searchImg from './assets/Search.png';
 import chartImg from './assets/Chart.png';
 import folderImg from './assets/Folder.png';
 import settingImg from './assets/Setting.png';
-import TicketCreationForm from './components/TicketCreationForm';
 import plusImg from './assets/plus.png';
+import TicketCreationForm from './components/TicketCreationForm';
+import Tickets from './components/Tickets';
 
 function HomePage() {
     const [message, setMessage] = useState('');
@@ -51,7 +52,7 @@ function MainPage() {
     const handleModalClose = (e) => {
         if(e.target.id === "close-modal-container") setShowModal(false)
     }
-    const createTicketButton = <button onClick={()=> setShowModal(true)}>create ticket</button>
+    const createTicketButton = <button onClick={()=> setShowModal(true)} className="w-full">create ticket</button>
     const Menus = [
         { title: "Dashboard", src: chartFillImg },
         { title: "Messages", src: chatImg },
@@ -103,7 +104,7 @@ function MainPage() {
             <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Main Page</h1>
             </div>
-            <TicketCreationForm onClose={handleModalClose} visible={showModal}/>
+            <TicketCreationForm onClose={handleModalClose} visible={showModal} userID={"12345"}/>
         </div>
         
     );
@@ -115,6 +116,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/main" element={<MainPage />} />
+                <Route path='/tickets' element={<Tickets />} />
             </Routes>
         </Router>
     );

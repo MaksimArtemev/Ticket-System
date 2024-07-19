@@ -12,6 +12,8 @@ import searchImg from './assets/Search.png';
 import chartImg from './assets/Chart.png';
 import folderImg from './assets/Folder.png';
 import settingImg from './assets/Setting.png';
+import TicketCreationForm from './components/TicketCreationForm';
+import plusImg from './assets/plus.png';
 
 function HomePage() {
     const [message, setMessage] = useState('');
@@ -27,7 +29,7 @@ function HomePage() {
         navigate('/main');
     }
     return (
-        <div className="App">
+        <div className="App flex-1 h-screen">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
                 <p>
@@ -37,12 +39,19 @@ function HomePage() {
                 <h1>{message}</h1>
                 <button onClick={goToMainPage}>Go to About Page</button>
             </header>
+
+
         </div>
     );
 }
 
 function MainPage() {
     const [open, setOpen] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const handleModalClose = (e) => {
+        if(e.target.id === "close-modal-container") setShowModal(false)
+    }
+    const createTicketButton = <button onClick={()=> setShowModal(true)}>create ticket</button>
     const Menus = [
         { title: "Dashboard", src: chartFillImg },
         { title: "Messages", src: chatImg },
@@ -52,6 +61,7 @@ function MainPage() {
         { title: "Ticket Analitics", src: chartImg },
         { title: "Files ", src: folderImg, gap: true },
         { title: "Setting", src: settingImg },
+        { title: createTicketButton, src: plusImg}
     ];
 
     return (
@@ -93,7 +103,9 @@ function MainPage() {
             <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Main Page</h1>
             </div>
+            <TicketCreationForm onClose={handleModalClose} visible={showModal}/>
         </div>
+        
     );
 }
 

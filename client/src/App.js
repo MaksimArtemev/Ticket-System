@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { Router, Route, Routes, useNavigate, Navigate } from 'react-router-dom';
+import Main from './components/Main';
+import Signup from './components/Signup';
+import Login from './components/Login';
 import logo from './logo.svg';
 import './App.css';
 import controlImg from './assets/control.png';
@@ -110,14 +113,24 @@ function MainPage() {
 }
 
 function App() {
+    const user = localStorage.getItem("token");
+
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/main" element={<MainPage />} />
-            </Routes>
-        </Router>
+        <Routes>
+            <Route path="/" element={<HomePage />} />
+
+            {user && <Route path="/" exact element={<Main />} />}
+            <Route path="/signup" exact element={<Signup />} />
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/" element={<Navigate replace to="/login" />} />
+
+            <Route path="/main" element={<MainPage />} />
+        </Routes>
+
     );
 }
 
 export default App;
+
+
+/*<Route path="/" element={<HomePage />} />*/

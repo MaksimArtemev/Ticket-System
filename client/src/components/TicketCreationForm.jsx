@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import ticketIssue0 from '../assets/ticket-issue-0.png';
 import ticketIssue1 from '../assets/ticket-issue-1.png';
 import ticketIssue2 from "../assets/ticket-issue-2.png";
@@ -7,11 +7,13 @@ import ticketIssue4 from "../assets/ticket-issue-4.png";
 import ticketIssue5 from "../assets/ticket-issue-5.png";
 import axios from 'axios';
 
+
 export default function TicketCreationForm({visible, onClose, userID}) {
   const [selectedTopic, setSelectedTopic] = useState(null);
-  const [files, setFiles] = useState([]);
   const [subject, setSubject] = useState('');
   const [description, setDescription] = useState('');
+  const [files, setFiles] = useState([]);
+  const form = useRef(null);
   const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
   const ticketTopics = [
@@ -23,26 +25,19 @@ export default function TicketCreationForm({visible, onClose, userID}) {
     { title: "Other", desc: lorem, icon: ticketIssue0}
   ];
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(selectedTopic, subject, description, userID, files);
     const formData = new FormData();
     formData.append('topic', selectedTopic);
     formData.append('subject', subject);
     formData.append('description', description);
-    formData.append('clientID', userID);
-    files.forEach( (file) => { formData.append('files', file); });
-  
-    try {
-      const response = await axios.post('api/tickets', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      console.log('Ticket added: ', response.data);
-    } catch(err) {
-        console.log('Error adding ticket: ', err);
-    }
+    axios.post('http://localhost:4000/tickets', formData, {
+      headers: {
+        'Content-Type': 'application/json' 
+      }
+    })
+    .then(response => { console.log(response) });
+
   }
 
   if(!visible) return null;
@@ -54,12 +49,18 @@ export default function TicketCreationForm({visible, onClose, userID}) {
           <button id="close-modal-container" onClick={onClose}>X
           </button>
         </div>
-        <form onSubmit={handleSubmit} encType="multipart/form-data" className="w-full">
+        <form ref={form} onSubmit={handleSubmit} className="form w-full">
           <p className="mb-4">Please select which type of issue you are experiencing.</p>
           <div className="grid gap-10 grid-cols-3 text-xs mb-6 mx-auto text-center w-5/6 ">
               {ticketTopics.map( (topic, index) => (
-                  <div key={index} onClick={() => setSelectedTopic(topic.title)} className="col-span-1" >
-                    <img src={topic.icon} alt="issue" className={`${selectedTopic === topic.title ? "outline-blue-600 outline-4" : "outline-black outline-2"} outline rounded-md p-2 mb-2`}/>
+                  <div key={index} 
+                  onClick={() => setSelectedTopic(topic.title)} 
+                  className="col-span-1">
+                    <img 
+                    src={topic.icon} 
+                    alt="issue" 
+                    className={`${selectedTopic === topic.title ? "outline-blue-600 outline-4" : "outline-black outline-2"} outline rounded-md p-2 mb-2`}
+                    />
                     <h1 className="underline"><b>{topic.title}</b></h1>
                     <p className="bg-slate-200 rounded-md p-2">{topic.desc}</p>
                   </div>

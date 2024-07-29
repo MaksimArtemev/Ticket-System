@@ -14,7 +14,6 @@ import folderImg from './assets/Folder.png';
 import settingImg from './assets/Setting.png';
 import plusImg from './assets/plus.png';
 import TicketCreationForm from './components/TicketCreationForm';
-import Tickets from './components/Tickets';
 
 function HomePage() {
     const [message, setMessage] = useState('');
@@ -116,7 +115,6 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/main" element={<MainPage />} />
-                <Route path='/tickets' element={<Tickets />} />
             </Routes>
         </Router>
     );

@@ -5,6 +5,8 @@ import ticketIssue2 from '../../assets/ticket-issue-2.png';
 import ticketIssue3 from '../../assets/ticket-issue-3.png';
 import ticketIssue4 from '../../assets/ticket-issue-4.png';
 import ticketIssue5 from '../../assets/ticket-issue-5.png';
+import axios from 'axios';
+
 
 export default function TicketCreationForm({ visible, onClose }) {
   const [selectedTopic, setSelectedTopic] = useState(null);

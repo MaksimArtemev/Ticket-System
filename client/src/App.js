@@ -40,9 +40,31 @@ function MainPage() {
         }
     }, []);
 
+    const [userName, setUserName] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            console.log("Decoded Token:", decodedToken); // Log the decoded token
+            if (decodedToken.firstName && decodedToken.lastName) {
+                setUserName(`${decodedToken.firstName} ${decodedToken.lastName}`);
+            } else {
+                setUserName("User"); // Fallback if the token does not have the required fields
+            }
+        }
+    }, []);
+
     const handleModalClose = (e) => {
-        if (e.target.id === "close-modal-container") setShowModal(false);
+        if  (e.target.id === "close-modal-container") setShowModal(false);;
     };
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login');
+    };
+;
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -52,22 +74,27 @@ function MainPage() {
     const handleFormSubmit = () => {
         
     }
-    const createTicketButton = <button onClick={() => setShowModal(true)} className="w-full">create ticket</button>;
+    const createTicketButton = <button onClick={()  => setShowModal(true)} className="w-full">create ticket</button>;;
     const Menus = [
         { title: "Dashboard", src: chartFillImg },
         { title: "Messages", src: chatImg },
         { title: userName, src: userImg, gap: true },
+        { title: userName, src: userImg, gap: true },
         { title: "Tickets in Calendar ", src: calendarImg },
         { title: "Search", src: searchImg },
         { title: "Ticket Analytics", src: chartImg },
+        { title: "Ticket Analytics", src: chartImg },
         { title: "Files ", src: folderImg, gap: true },
         { title: "Setting", src: settingImg },
+        { title: createTicketButton, src: plusImg },
+        { title: "Logout", src: null, onClick: handleLogout } // Adding Logout button
         { title: createTicketButton, src: plusImg },
         { title: "Logout", src: null, onClick: handleLogout } // Adding Logout button
     ];
 
     return (
         <div className="flex">
+            <div className={` ${open ? "w-72" : "w-20 "} bg-dark-purple h-screen p-5 pt-8 relative duration-300`}>
             <div className={` ${open ? "w-72" : "w-20 "} bg-dark-purple h-screen p-5 pt-8 relative duration-300`}>
                 <img
                     src={controlImg}
@@ -78,10 +105,12 @@ function MainPage() {
                     <img
                         src={logoImg}
                         className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"}`}
+                        className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"}`}
                     />
                     <h1
                         className={`text-white origin-left font-medium text-xl duration-200 ${!open && "scale-0"}`}
                     >
+                        {userName}
                         {userName}
                     </h1>
                 </div>
@@ -92,7 +121,9 @@ function MainPage() {
                             className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
                                 ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 && "bg-light-white"} `}
                             onClick={Menu.onClick ? Menu.onClick : null}
+                            onClick={Menu.onClick ? Menu.onClick : null}
                         >
+                            {Menu.src && <img src={Menu.src} />}
                             {Menu.src && <img src={Menu.src} />}
                             <span className={`${!open && "hidden"} origin-left duration-200`}>
                                 {Menu.title}
@@ -105,11 +136,14 @@ function MainPage() {
                 <h1 className="text-2xl font-semibold ">Main Page</h1>
             </div>
             <TicketCreationForm onClose={handleModalClose} visible={showModal} />
+            <TicketCreationForm onClose={handleModalClose} visible={showModal} />
         </div>
     );
 }
 
 function App() {
+    const user = localStorage.getItem("token");
+
     const user = localStorage.getItem("token");
 
     return (

@@ -118,7 +118,7 @@ function App() {
     return (
         <Routes>
 
-
+            <Route path="/" element={<HomePage />} />
             {user && <Route path="/" exact element={<Main />} />}
             <Route path="/signup" exact element={<Signup />} />
             <Route path="/login" exact element={<Login />} />

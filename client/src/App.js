@@ -6,7 +6,7 @@ import { jwtDecode } from 'jwt-decode';
 import Main from './components/Main';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import TicketCreationForm from './components/TicketCreationForm';
+import TicketCreationForm from './components/TicketCreation/TicketCreationForm';
 import chartFillImg from './assets/Chart_fill.png';
 import chatImg from './assets/Chat.png';
 import userImg from './assets/User.png';

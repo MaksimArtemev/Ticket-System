@@ -1,11 +1,12 @@
-import { useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import styles from "./styles.module.css";
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import styles from './styles.module.css';
 
 const Login = () => {
-    const [data, setData] = useState({ email: "", password: "" });
-    const [error, setError] = useState("");
+    const [data, setData] = useState({ email: '', password: '' });
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value });
@@ -14,18 +15,11 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const url = "http://localhost:8000/api/auth";
-            const { data: res } = await axios.post(url, data);
-            localStorage.setItem("token", res.data);
-            window.location = "/";
-        } catch (error) {
-            if (
-                error.response &&
-                error.response.status >= 400 &&
-                error.response.status <= 500
-            ) {
-                setError(error.response.data.message);
-            }
+            const response = await axios.post('http://localhost:4000/api/auth', data);
+            localStorage.setItem('token', response.data.data); // Save the JWT token to localStorage
+            navigate('/main'); // Redirect to the main page
+        } catch (err) {
+            setError('Invalid email or password');
         }
     };
 
@@ -63,7 +57,7 @@ const Login = () => {
                     <h1>New Here ?</h1>
                     <Link to="/signup">
                         <button type="button" className={styles.white_btn}>
-                            Sign up
+                            Sign Up
                         </button>
                     </Link>
                 </div>

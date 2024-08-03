@@ -1,8 +1,15 @@
 const router = require("express").Router();
-const { User } = require("../models/user");
+const { User } = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 
+//Purpose:
+//User Authentication: This file handles user login and authentication.
+//Token Generation: It generates a JWT token for authenticated users.
+
+
+
+// POST /api/auth - Authenticate a user and return a token
 router.post("/", async (req, res) => {
     try {
         const { error } = validate(req.body);

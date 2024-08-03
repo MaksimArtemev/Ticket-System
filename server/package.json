@@ -8,10 +8,10 @@
     "joi-password-complexity": "^5.2.0",
     "jsonwebtoken": "^9.0.2",
     "mogoose": "*",
-    "mongoose": "^8.4.1",
+    "mongoose": "^8.5.2",
     "nodemon": "^3.1.4"
   },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon appServer.js"
   }
 }

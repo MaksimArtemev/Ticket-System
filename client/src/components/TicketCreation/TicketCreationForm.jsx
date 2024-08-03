@@ -11,6 +11,7 @@ export default function TicketCreationForm({ visible, onClose }) {
   const [subject, setSubject] = useState('');
   const [description, setDescription] = useState('');
   const [files, setFiles] = useState([]);
+  const [filePreviews, setFilePreviews] = useState([]);
 
   const ticketTopics = [
     { topic: "Repair", desc: "Issues related to hardware or software repairs. Please describe the problem and any relevant details.", icon: ticketIssue5 },
@@ -20,24 +21,42 @@ export default function TicketCreationForm({ visible, onClose }) {
     { topic: "Hardware", desc: "Issues specific to hardware components, such as malfunctioning devices, connectivity issues, or hardware upgrades.", icon: ticketIssue0 },
     { topic: "Software", desc: "Software-related problems, including installation issues, bugs, or software updates.", icon: ticketIssue1 },
   ];
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    console.log('Form submitted'); // Debugging statement
+  console.log('Selected topic:', selectedTopic); // Debugging statement
+  console.log('Subject:', subject); // Debugging statement
+  console.log('Description:', description); // Debugging statement
+
+
     const formData = new FormData();
     formData.append('topic', selectedTopic);
     formData.append('subject', subject);
     formData.append('description', description);
     files.forEach(file => formData.append('files', file));
+    console.log('Form data:', formData); // Debugging statement
+
 
     try {
-      const response = await fetch('/api/tickets', {
+      const token = localStorage.getItem('token'); // Retrieve the JWT token from local storage
+      console.log('Token:', token); // Debugging statement
+
+
+       const response = await fetch('http://localhost:4000/api/tickets', {
         method: 'POST',
+        headers: {
+          'x-auth-token': token // Include the token in the request headers
+        },
         body: formData,
       });
       const data = await response.json();
       if (response.ok) {
         console.log('Ticket created with ID:', data.ticketID);
+        // Optionally, reset the form or provide feedback to the user
+        // Redirect to the main page or chat system
+        window.location.href = "/main"; // Adjust the URL as needed
       } else {
         console.error('Error creating ticket:', data.message);
       }
@@ -47,7 +66,11 @@ export default function TicketCreationForm({ visible, onClose }) {
   };
 
   const handleFileChange = (event) => {
-    setFiles(Array.from(event.target.files));
+    const selectedFiles = Array.from(event.target.files);
+    setFiles(selectedFiles);
+
+    const previews = selectedFiles.map(file => URL.createObjectURL(file));
+    setFilePreviews(previews);
   };
 
   if (!visible) return null;
@@ -61,7 +84,11 @@ export default function TicketCreationForm({ visible, onClose }) {
           <p className="mb-4">Please select which type of issue you are experiencing.</p>
           <div className="grid gap-10 grid-cols-3 grid-rows-1 text-xs mb-6 mx-auto text-center w-5/6">
             {ticketTopics.map((topic, index) => (
-              <div key={index} onClick={() => setSelectedTopic(topic.topic)} className={`col-span-1 ${selectedTopic === topic.topic ? 'border-blue-600' : 'border-2'} outline rounded-md p-2 mb-2 cursor-pointer`}>
+              <div
+                key={index}
+                onClick={() => setSelectedTopic(topic.topic)}
+                className={`col-span-1 cursor-pointer p-2 mb-2 rounded-md ${selectedTopic === topic.topic ? 'bg-blue-100 border-2 border-blue-600' : 'border-2 border-gray-200'}`}
+              >
                 <img src={topic.icon} alt={topic.topic} className="mb-2"/>
                 <h1 className="underline"><b>{topic.topic}</b></h1>
                 <p className="bg-slate-200 rounded-md p-2">{topic.desc}</p>
@@ -82,6 +109,11 @@ export default function TicketCreationForm({ visible, onClose }) {
             <div className="outline-1 outline-black outline-dashed rounded-md h-48 flex justify-center place-items-center bg-gray-200 text-center relative">
               <input type="file" multiple onChange={handleFileChange} className="opacity-0 w-full h-full z-50" name="userPictures" />
               <p className="absolute text-xs">drag and drop your files here <br /> or <br /> select files from your device</p>
+            </div>
+            <div className="mt-4">
+              {filePreviews.map((preview, index) => (
+                <img key={index} src={preview} alt={`preview ${index}`} className="inline-block h-24 mr-2 rounded-md" />
+              ))}
             </div>
           </div>
           <div className="flex justify-center mt-8">

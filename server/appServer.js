@@ -22,8 +22,9 @@ app.use(cors(corsOptions));
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/ticketRoutes", ticketRoutes);
-const PORT = process.env.PORT || 8000;
+app.use("/api/tickets", ticketRoutes); 
+
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`App is Listening on PORT ${PORT}`));
 
 app.get('/test', (req, res) => {

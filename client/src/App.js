@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
-
 import Main from './components/Main';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import TicketCreationForm from './components/TicketCreation/TicketCreationForm';
+import TicketCreationForm from './components/Tickets/TicketCreationForm';
+import TicketsTable from './components/Tickets/TicketsTable';
+import TicketsPage from './components/Tickets/TicketsPage';
 import chartFillImg from './assets/Chart_fill.png';
 import chatImg from './assets/Chat.png';
 import userImg from './assets/User.png';
@@ -23,6 +24,7 @@ import './App.css';
 function MainPage() {
     const [open, setOpen] = useState(true);
     const [showModal, setShowModal] = useState(false);
+    const [showTickets, setShowTickets] = useState(false);
     const [userName, setUserName] = useState('');
     const navigate = useNavigate();
 
@@ -39,21 +41,27 @@ function MainPage() {
         }
     }, []);
 
+
     const handleModalClose = (e) => {
-        if (e.target.id === "close-modal-container") setShowModal(false);
+        if  (e.target.id === "close-modal-container") setShowModal(false);;
     };
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/login');
     };
+    const handleFormSubmit = () => {
+        
+    }
+    const createTicketButton = <button onClick={ ()  => setShowModal(true)} className="w-full">create ticket</button>;
 
-    const createTicketButton = <button onClick={() => setShowModal(true)}>create ticket</button>;
+    const viewTicketsButton = <button onClick ={ () => setShowTickets(true)}>Tickets in Calendar</button>
+
     const Menus = [
         { title: "Dashboard", src: chartFillImg },
         { title: "Messages", src: chatImg },
         { title: userName, src: userImg, gap: true },
-        { title: "Tickets in Calendar ", src: calendarImg },
+        { title: viewTicketsButton, src: calendarImg },
         { title: "Search", src: searchImg },
         { title: "Ticket Analytics", src: chartImg },
         { title: "Files ", src: folderImg, gap: true },
@@ -99,6 +107,7 @@ function MainPage() {
             </div>
             <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Main Page</h1>
+                <TicketsTable />
             </div>
             <TicketCreationForm onClose={handleModalClose} visible={showModal} />
         </div>
@@ -115,6 +124,7 @@ function App() {
             <Route path="/login" exact element={<Login />} />
             <Route path="/" element={<Navigate replace to="/login" />} />
             <Route path="/main" element={<MainPage />} />
+            <Route path='/tickets' element={ <TicketsPage />} />
         </Routes>
     );
 }

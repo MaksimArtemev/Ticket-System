@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const connection = require("./db");
 const userRoutes = require('./routes/usersRoutes');
 const authRoutes = require('./routes/authRoutes');
-
+const ticketRoutes = require('./routes/ticketRoutes');
 dotenv.config(); // Load environment variables
 
 const app = express();
@@ -22,8 +22,9 @@ app.use(cors(corsOptions));
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/tickets", ticketRoutes); 
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`App is Listening on PORT ${PORT}`));
 
 app.get('/test', (req, res) => {

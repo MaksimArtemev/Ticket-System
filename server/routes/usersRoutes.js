@@ -1,7 +1,13 @@
 const router = require("express").Router();
-const { User, validate } = require("../models/user");
+const { User, validate } = require("../models/userModel");
 const bcrypt = require("bcrypt");
+const auth = require("../MiddleWare/authMiddleware");
+//Purpose
+// User Registration: This file primarily handles the registration of new users.
+// Protected Route: It includes an example of a protected route that requires authentication.
 
+
+//This file handles user registration
 router.post("/", async (req, res) => {
     try {
         const { error } = validate(req.body);
@@ -22,6 +28,12 @@ router.post("/", async (req, res) => {
     } catch (error) {
         res.status(500).send({ message: "Internal Server Error" });
     }
+});
+
+// Example of a protected route
+router.get("/me", auth, async (req, res) => {
+    const user = await User.findById(req.user._id).select("-password");
+    res.send(user);
 });
 
 module.exports = router;

@@ -1,16 +1,11 @@
-import { useState } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import styles from "./styles.module.css";
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import styles from './styles.module.css';
 
 const Signup = () => {
-    const [data, setData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-    });
-    const [error, setError] = useState("");
+    const [data, setData] = useState({ firstName: '', lastName: '', email: '', password: '' });
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleChange = ({ currentTarget: input }) => {
@@ -20,18 +15,11 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const url = "http://localhost:8000/api/users";
-            const { data: res } = await axios.post(url, data);
-            navigate("/login");
-            console.log(res.message);
-        } catch (error) {
-            if (
-                error.response &&
-                error.response.status >= 400 &&
-                error.response.status <= 500
-            ) {
-                setError(error.response.data.message);
-            }
+            const response = await axios.post('http://localhost:4000/api/users', data);
+            localStorage.setItem('token', response.data.data); // Save the JWT token to localStorage
+            navigate('/main'); // Redirect to the main page
+        } catch (err) {
+            setError('Error creating account');
         }
     };
 
@@ -42,7 +30,7 @@ const Signup = () => {
                     <h1>Welcome Back</h1>
                     <Link to="/login">
                         <button type="button" className={styles.white_btn}>
-                            Sing in
+                            Log in
                         </button>
                     </Link>
                 </div>
@@ -87,7 +75,7 @@ const Signup = () => {
                         />
                         {error && <div className={styles.error_msg}>{error}</div>}
                         <button type="submit" className={styles.green_btn}>
-                            Sing Up
+                            Sign up
                         </button>
                     </form>
                 </div>

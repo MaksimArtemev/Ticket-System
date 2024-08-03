@@ -50,19 +50,24 @@ app.post('/tickets', async (req, res) => {
     const ticketTopic = req.body.topic;
     const ticketSubject = req.body.subject;
     const ticketDesc = req.body.description;
-    const id = "123";
+    const id = "123"; // <==== replace this with a real user ID
+
+    // TODO: integrate files from form into database
+
     try{
         const t = new Ticket({
             topic: ticketTopic, 
             subject: ticketSubject, 
             description: ticketDesc, 
-            clientId: id});
+            clientID: id});
         await t.save();
     } catch (err) {
         console.log(err);
     }
 });
 
-app.get("/tickets", (req, res) => {
-    res.status(201).json("sdkhfjgdsj");
+app.get("/tickets", (req, res) => {S
+    Ticket.find()
+    .then(tickets => res.json(tickets))
+    .catch(err => res.json(err));
 });

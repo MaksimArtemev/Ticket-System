@@ -14,6 +14,7 @@ import folderImg from './assets/Folder.png';
 import settingImg from './assets/Setting.png';
 import plusImg from './assets/plus.png';
 import TicketCreationForm from './components/TicketCreationForm';
+import TicketsPage from './components/TicketsPage';
 
 function HomePage() {
     const [message, setMessage] = useState('');
@@ -50,6 +51,9 @@ function MainPage() {
     const [showModal, setShowModal] = useState(false);
     const handleModalClose = (e) => {
         if(e.target.id === "close-modal-container") setShowModal(false)
+    }
+    const handleFormSubmit = () => {
+        
     }
     const createTicketButton = <button onClick={()=> setShowModal(true)} className="w-full">create ticket</button>
     const Menus = [
@@ -115,6 +119,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/main" element={<MainPage />} />
+                <Route path='/tickets' element={<TicketsPage />} />
             </Routes>
         </Router>
     );

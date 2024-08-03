@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, {useState} from 'react'
 import ticketIssue0 from '../assets/ticket-issue-0.png';
 import ticketIssue1 from '../assets/ticket-issue-1.png';
 import ticketIssue2 from "../assets/ticket-issue-2.png";
 import ticketIssue3 from "../assets/ticket-issue-3.png";
 import ticketIssue4 from "../assets/ticket-issue-4.png";
 import ticketIssue5 from "../assets/ticket-issue-5.png";
+import submitCheck  from "../assets/checked.png";
 import axios from 'axios';
 
 
@@ -13,7 +14,8 @@ export default function TicketCreationForm({visible, onClose, userID}) {
   const [subject, setSubject] = useState('');
   const [description, setDescription] = useState('');
   const [files, setFiles] = useState([]);
-  const form = useRef(null);
+  const [showForm, setShowForm] = useState(true);
+
   const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
   const ticketTopics = [
@@ -38,9 +40,24 @@ export default function TicketCreationForm({visible, onClose, userID}) {
     })
     .then(response => { console.log(response) });
 
+    setShowForm(false);
   }
 
   if(!visible) return null;
+  else if (visible && !showForm) {
+    return (
+      <div id="close-modal-container" onClick={onClose} className="h-screen w-screen absolute bg-black bg-opacity-30 backdrop-blur-sm flex justify-center place-items-center z-40">
+        <div className="bg-white py-3 px-6 rounded w-3/5 size-11/12 overflow-auto text-center">
+            <div className="flex justify-end">
+              <button id="close-modal-container" onClick={onClose}>X
+              </button>
+            </div>
+          <img src={submitCheck} className="mx-auto w-1/3 pt-6 pb-6" />
+          <p className="pt-6">Your ticket has successfully been submitted!</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div id="close-modal-container" onClick={onClose} className="h-screen w-screen absolute bg-black bg-opacity-30 backdrop-blur-sm flex justify-center place-items-center z-40">
@@ -49,7 +66,7 @@ export default function TicketCreationForm({visible, onClose, userID}) {
           <button id="close-modal-container" onClick={onClose}>X
           </button>
         </div>
-        <form ref={form} onSubmit={handleSubmit} className="form w-full">
+        <form onSubmit={handleSubmit} className="form w-full">
           <p className="mb-4">Please select which type of issue you are experiencing.</p>
           <div className="grid gap-10 grid-cols-3 text-xs mb-6 mx-auto text-center w-5/6 ">
               {ticketTopics.map( (topic, index) => (

@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-import ticketIssue0 from '../assets/ticket-issue-0.png';
-import ticketIssue1 from '../assets/ticket-issue-1.png';
-import ticketIssue2 from "../assets/ticket-issue-2.png";
-import ticketIssue3 from "../assets/ticket-issue-3.png";
-import ticketIssue4 from "../assets/ticket-issue-4.png";
-import ticketIssue5 from "../assets/ticket-issue-5.png";
-import submitCheck  from "../assets/checked.png";
+import ticketIssue0 from '../../assets/ticket-issue-0.png';
+import ticketIssue1 from '../../assets/ticket-issue-1.png';
+import ticketIssue2 from "../../assets/ticket-issue-2.png";
+import ticketIssue3 from "../../assets/ticket-issue-3.png";
+import ticketIssue4 from "../../assets/ticket-issue-4.png";
+import ticketIssue5 from "../../assets/ticket-issue-5.png";
+import submitCheck  from "../../assets/checked.png";
 import axios from 'axios';
 
 

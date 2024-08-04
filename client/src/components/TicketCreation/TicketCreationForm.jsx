@@ -74,9 +74,10 @@ export default function TicketCreationForm({ visible, onClose }) {
   };
 
   if (!visible) return null;
+  
   return (
-    <div id="close-modal-container" onClick={onClose} className="h-screen w-screen absolute bg-black bg-opacity-30 backdrop-blur-sm flex justify-center place-items-center z-40">
-      <div className="bg-white py-3 px-6 rounded w-4/5 h-full overflow-y-auto">
+    <div id="close-modal-container" onClick={onClose} className="absolute bg-black bg-opacity-30 backdrop-blur-sm flex justify-center place-items-center z-40">
+      <div className="bg-white py-3 px-6 rounded w-2/3 h-full overflow-y-auto">
         <div className="flex justify-end">
           <button id="close-modal-container" onClick={onClose}>X</button>
         </div>

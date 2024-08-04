@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
-import styles from './styles.module.css';
+import styles from './styles.module.css'; // Make sure to import your CSS module
 
-const Signup = () => {
-    const [data, setData] = useState({ firstName: '', lastName: '', email: '', password: '' });
+function Signup() {
+    const [data, setData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
+    });
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -15,11 +19,26 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:4000/api/users', data);
-            localStorage.setItem('token', response.data.data); // Save the JWT token to localStorage
-            navigate('/main'); // Redirect to the main page
-        } catch (err) {
-            setError('Error creating account');
+            const response = await fetch('http://localhost:4000/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                console.log('Signup successful:', result);
+                localStorage.setItem('token', result.data); // Store the token in localStorage
+                navigate('/main'); // Navigate to the main page after successful signup
+            } else {
+                console.error('Signup failed:', result.message);
+                setError(result.message); // Display error message
+            }
+        } catch (error) {
+            console.error('Error signing up:', error);
+            setError('An error occurred. Please try again.');
         }
     };
 
@@ -82,6 +101,6 @@ const Signup = () => {
             </div>
         </div>
     );
-};
+}
 
 export default Signup;

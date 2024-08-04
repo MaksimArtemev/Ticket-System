@@ -54,6 +54,8 @@ export default function TicketCreationForm({ visible, onClose }) {
         body: formData,
       });
       const data = await response.json();
+      console.log('Response: lol', data); // Debugging statement
+
       if (response.ok) {
         console.log('Ticket created with ID:', data.ticketID);
         // Optionally, reset the form or provide feedback to the user

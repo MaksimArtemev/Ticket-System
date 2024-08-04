@@ -8,7 +8,7 @@ import TicketCreationForm from './components/TicketCreation/TicketCreationForm';
 import TicketsTable from './components/Employee/TicketsEmployeeTable';
 import TicketsPageAdmin from './components/Admin/TicketsPageAdmin';
 import TicketEditForm from './components/Admin/AdminTicketEditForm';
-import TicketsPage from './components/Employee/TicketsEmployeePage';
+import TicketsPage from './components/User/TicketsPage';
 import chartFillImg from './assets/Chart_fill.png';
 import chatImg from './assets/Chat.png';
 import userImg from './assets/User.png';
@@ -119,7 +119,7 @@ function MainPage() {
             </div>
             <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Main Page</h1>
-                <TicketsPageAdmin onRowClick={ handleRowClick }/>
+                <TicketsPage onRowClick={ handleRowClick }/>
             </div>
             <TicketCreationForm onClose={handleModalClose} visible={showModal} />
             <TicketEditForm onClose={handleTicketEditFormClose} visible={showEditForm} ticket={selectedTicket}/>

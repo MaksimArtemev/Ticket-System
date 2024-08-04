@@ -1,11 +1,11 @@
 import React from 'react';
-
+import TicketsTable from './TicketsTable'
 const TicketsPage = () => {
 
     return (
         <div>
-            <div className = "flex">
-                <p>hellooo</p>
+            <div className = "h-full">
+            <TicketsTable />
             </div>
         </div>
     )

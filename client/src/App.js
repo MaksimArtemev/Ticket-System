@@ -5,8 +5,10 @@ import Main from './components/Main';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import TicketCreationForm from './components/TicketCreation/TicketCreationForm';
-import TicketsTable from './components/TicketCreation/TicketsTable';
-import TicketsPage from './components/TicketCreation/TicketsPage';
+import TicketsTable from './components/Employee/TicketsEmployeeTable';
+import TicketsPageAdmin from './components/Admin/TicketsPageAdmin';
+import TicketEditForm from './components/Admin/AdminTicketEditForm';
+import TicketsPage from './components/User/TicketsPage';
 import chartFillImg from './assets/Chart_fill.png';
 import chatImg from './assets/Chat.png';
 import userImg from './assets/User.png';
@@ -28,7 +30,11 @@ function MainPage() {
     const [userName, setUserName] = useState('');
     const [selectedTicket, setSelectedTicket] = useState({});
     const navigate = useNavigate();
-
+    const [selectedTicket, setSelectedTicket] = useState({});
+    const [showEditForm, setShowEditForm] = useState(false);
+    const handleTicketEditFormClose = (e) => {
+        if  (e.target.id === "close-ticketEdit-container") setShowEditForm(false);
+    }; 
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -64,6 +70,7 @@ function MainPage() {
         localStorage.removeItem('token');
         navigate('/login');
     };
+    
     
     const createTicketButton = <button onClick={ ()  => setShowModal(true)} className="w-full">create ticket</button>;
 
@@ -122,6 +129,7 @@ function MainPage() {
                 <TicketsPageAdmin onRowClick={ handleRowClick }/>
             </div>
             <TicketCreationForm onClose={handleModalClose} visible={showModal} />
+            <TicketEditForm onClose={handleTicketEditFormClose} visible={showEditForm} ticket={selectedTicket}/>
             <TicketEditForm onClose={handleTicketEditFormClose} visible={showEditForm} ticket={selectedTicket}/>
         </div>
     );

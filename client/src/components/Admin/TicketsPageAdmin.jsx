@@ -1,6 +1,6 @@
 import React from 'react';
 import TicketsTableAdmin from './TicketsTableAdmin';
-import TicketEditForm from './TicketEditForm';
+import TicketEditForm from './AdminTicketEditForm';
 
 const TicketsPageAdmin = ({onRowClick}) => {   
 

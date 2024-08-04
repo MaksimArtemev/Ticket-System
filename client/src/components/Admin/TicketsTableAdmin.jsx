@@ -5,7 +5,7 @@ import { mockDataTickets } from "../mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
-import TicketEditForm from "../Admin/TicketEditForm";
+import TicketEditForm from "./AdminTicketEditForm";
 
 const Team = ({onClick}) => {
     const theme = useTheme();

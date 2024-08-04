@@ -4,7 +4,6 @@ export const mockDataTickets = [
   {
     id: 0xDEADBEEF,
     userID: 0xAAAAAAAA,
-    employeeID: 0x1234ABCD,
     type: "Repair",
     subject: "Broken web camera",
     description: "My weeb camera broke and I need it fixed ASAP for meetings.",
@@ -13,7 +12,6 @@ export const mockDataTickets = [
   {
     id: 0xBADDCAFE,
     userID: 0xBBBBBBB,
-    employeeID: 0x1234ABCD,
     type: "Software",
     subject: "Broken web camera",
     description: "My weeb camera broke and I need it fixed ASAP for meetings.",
@@ -22,7 +20,6 @@ export const mockDataTickets = [
   {
     id: 0xDEADC0DE,
     userID: 0xCCCCCCCC,
-    employeeID: 0x1234ABCD,
     type: "Billing",
     subject: "Broken web camera",
     description: "My weeb camera broke and I need it fixed ASAP for meetings.",
@@ -31,7 +28,6 @@ export const mockDataTickets = [
   {
     id: 0xFEE1DEAD,
     userID: 0xDDDDDDDD,
-    employeeID: 0x1234ABCD,
     type: "Other",
     subject: "Broken web camera",
     description: "My weeb camera broke and I need it fixed ASAP for meetings.",
@@ -40,7 +36,6 @@ export const mockDataTickets = [
   {
     id: 0xBAAAAAAD,
     userID: 0xEEEEEEE,
-    employeeID: 0x1234ABCD,
     type: "Repair",
     subject: "Broken web camera",
     description: "My weeb camera broke and I need it fixed ASAP for meetings.",

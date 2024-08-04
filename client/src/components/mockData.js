@@ -1,6 +1,6 @@
-import { tokens } from "../theme";
+import { tokens } from "./theme";
 
-export const mockDataTeam = [
+export const mockDataTickets = [
   {
     id: 0xDEADBEEF,
     userID: 0xAAAAAAAA,

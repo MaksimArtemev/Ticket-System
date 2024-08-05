@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import Main from './components/Main';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Calendar from './components/Calendar/Calendar';
 import TicketCreationForm from './components/TicketCreation/TicketCreationForm';
 import TicketsTable from './components/Employee/TicketsEmployeeTable';
 import TicketsPageAdmin from './components/Admin/TicketsPageAdmin';
@@ -74,6 +75,7 @@ function MainPage() {
         { title: "Messages", src: chatImg },
         { title: userName, src: userImg, gap: true },
         { title: viewTicketsButton, src: calendarImg },
+        { title: "Calendar", src: calendarImg, onClick: () => navigate('/calendar') },
         { title: "Search", src: searchImg },
         { title: "Ticket Analytics", src: chartImg },
         { title: "Files ", src: folderImg, gap: true },
@@ -138,6 +140,7 @@ function App() {
             <Route path="/" element={<Navigate replace to="/login" />} />
             <Route path="/main" element={<MainPage />} />
             <Route path='/tickets' element={ <TicketsPage />} />
+            <Route path="/calendar" element={<Calendar />} />
         </Routes>
     );
 }

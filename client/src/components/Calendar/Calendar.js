@@ -16,6 +16,11 @@ import folderImg from '../../assets/Folder.png';
 import settingImg from '../../assets/Setting.png';
 import plusImg from '../../assets/plus.png';
 
+// Registering Syncfusion license key
+import { registerLicense } from '@syncfusion/ej2-base';
+
+registerLicense('Ngo9BigBOggjHTQxAR8/V1NCaF1cWmhAYVdpR2Nbe050flVGal5XVAciSV9jS3pTfkVmWXtbdHVURWZZUw==');
+
 function Calendar() {
     const [open, setOpen] = useState(true);
     const navigate = useNavigate();

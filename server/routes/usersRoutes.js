@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { User, validate } = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const auth = require("../MiddleWare/authMiddleware");
-
+const checkRoles = require('../MiddleWare/roleMiddleware');
 router.post("/", async (req, res) => {
     try {
         const { error } = validate(req.body);

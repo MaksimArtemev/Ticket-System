@@ -17,7 +17,7 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:4000/api/auth', data);
             localStorage.setItem('token', response.data.data); // Save the JWT token to localStorage
-            navigate('/main'); // Redirect to the main page
+            navigate('/'); // Redirect to the main page
         } catch (err) {
             setError('Invalid email or password');
         }

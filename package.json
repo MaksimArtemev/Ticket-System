@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/MaksimArtemev/Ticket-System/issues"
   },
-  "homepage": "https://github.com/MaksimArtemev/Ticket-System#readme"
+  "homepage": "https://github.com/MaksimArtemev/Ticket-System#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "mongoose": "^8.5.2"
+  }
 }

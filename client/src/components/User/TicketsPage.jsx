@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import TicketsTable from './TicketsTable';
-
+console.log('Yoo im from user mainpage');
 const TicketsPage = ({ onRowClick }) => {
     const [tickets, setTickets] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        console.log('Yoo im from user mainpage');
         const fetchTickets = async () => {
             try {
                 const token = localStorage.getItem('token');

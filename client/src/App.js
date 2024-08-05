@@ -5,7 +5,7 @@ import Main from './components/Main';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import TicketCreationForm from './components/TicketCreation/TicketCreationForm';
-import TicketsTable from './components/Employee/TicketsEmployeeTable';
+import TicketsEmployeePage from './components/Employee/TicketsEmployeePage';
 import TicketsPageAdmin from './components/Admin/TicketsPageAdmin';
 import TicketEditForm from './components/Admin/AdminTicketEditForm';
 import TicketsPage from './components/User/TicketsPage';
@@ -20,6 +20,7 @@ import settingImg from './assets/Setting.png';
 import plusImg from './assets/plus.png';
 import controlImg from './assets/control.png';
 import logoImg from './assets/logo.png';
+
 import './App.css';
 
 function MainPage() {
@@ -27,12 +28,15 @@ function MainPage() {
     const [showModal, setShowModal] = useState(false);
     const [showTickets, setShowTickets] = useState(false);
     const [userName, setUserName] = useState('');
+    const [role, setRole] = useState('');
     const navigate = useNavigate();
     const [selectedTicket, setSelectedTicket] = useState({});
     const [showEditForm, setShowEditForm] = useState(false);
+
     const handleTicketEditFormClose = (e) => {
-        if  (e.target.id === "close-ticketEdit-container") setShowEditForm(false);
-    }; 
+        if (e.target.id === "close-ticketEdit-container") setShowEditForm(false);
+    };
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -43,31 +47,30 @@ function MainPage() {
             } else {
                 setUserName("User"); // Fallback if the token does not have the required fields
             }
+            setRole(decodedToken.role); // Set the role
         }
     }, []);
 
-
     const handleModalClose = (e) => {
-        if  (e.target.id === "close-modal-container") setShowModal(false);;
+        if (e.target.id === "close-modal-container") setShowModal(false);
     };
 
     const handleRowClick = (params, event, details) => {
-        setShowEditForm(true)
+        setShowEditForm(true);
         setSelectedTicket({
             ticketID: params.row.id,
             userID: params.row.userID,
             type: params.row.type,
-        })
+        });
     };
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/login');
     };
-    
-    const createTicketButton = <button onClick={ ()  => setShowModal(true)} className="w-full">create ticket</button>;
 
-    const viewTicketsButton = <button onClick ={ () => setShowTickets(true)}>Tickets in Calendar</button>
+    const createTicketButton = <button onClick={() => setShowModal(true)} className="w-full">create ticket</button>;
+    const viewTicketsButton = <button onClick={() => setShowTickets(true)}>Tickets in Calendar</button>;
 
     const Menus = [
         { title: "Dashboard", src: chartFillImg },
@@ -117,12 +120,9 @@ function MainPage() {
                     ))}
                 </ul>
             </div>
-            <div className="h-screen flex-1 p-7">
-                <h1 className="text-2xl font-semibold ">Main Page</h1>
-                <TicketsPage onRowClick={ handleRowClick }/>
-            </div>
+
             <TicketCreationForm onClose={handleModalClose} visible={showModal} />
-            <TicketEditForm onClose={handleTicketEditFormClose} visible={showEditForm} ticket={selectedTicket}/>
+            <TicketEditForm onClose={handleTicketEditFormClose} visible={showEditForm} ticket={selectedTicket} />
         </div>
     );
 }
@@ -138,6 +138,8 @@ function App() {
             <Route path="/" element={<Navigate replace to="/login" />} />
             <Route path="/main" element={<MainPage />} />
             <Route path='/tickets' element={ <TicketsPage />} />
+            <Route path='/admin-tickets' element={<TicketsPageAdmin />} />
+            <Route path='/employee-tickets' element={<TicketsEmployeePage />} />
         </Routes>
     );
 }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import { Inject, ScheduleComponent, Day, Week, Month } from '@syncfusion/ej2-react-schedule';
+import '../../App.css';
 
 import controlImg from '../../assets/control.png';
 import logoImg from '../../assets/logo.png';
@@ -90,6 +92,9 @@ function Calendar() {
             <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Calendar Page</h1>
                 {/* calendar component that i will hopefully get to make because it took forever to figure out how to get this sidebar on the page */}
+                <ScheduleComponent>
+                    <Inject services={[Day, Week, Month]} />
+                </ScheduleComponent>
             </div>
         </div>
     );

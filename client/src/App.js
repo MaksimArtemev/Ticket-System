@@ -9,6 +9,7 @@ import Messages from './components/Messages/Messages'
 import AddEmployee from './components/AddEmployee/AddEmployee';
 import TicketEditForm from './components/Admin/AdminTicketEditForm';
 import TicketsPage from './components/User/TicketsPage';
+import CalendarPage from './components/Calendar/CalendarPage';
 import chartFillImg from './assets/Chart_fill.png';
 import chatImg from './assets/Chat.png';
 import userImg from './assets/User.png';
@@ -76,6 +77,10 @@ function MainPage() {
         navigate('/messages');
     };
 
+    const goToCalendar = () => {
+        navigate('/calendar');
+    };
+
     const createTicketButton = <button onClick={() => setShowModal(true)} className="w-full">create ticket</button>;
     const viewTicketsButton = <button onClick={() => setShowTickets(true)}>Tickets in Calendar</button>;
 
@@ -83,7 +88,7 @@ function MainPage() {
         { title: "Dashboard", src: chartFillImg },
         { title: "Messages", src: chatImg, onClick: goToMessages },
         { title: userName, src: userImg, gap: true },
-        userRole === 'admin' && { title: viewTicketsButton, src: calendarImg },
+        (userRole === 'admin' || userRole === 'employee') && { title: "Calendar", src: calendarImg, onClick: goToCalendar }, // Allow both admin and employee
         { title: "Search", src: searchImg },
         { title: "Ticket Analytics", src: chartImg },
         { title: "Files ", src: folderImg, gap: true },
@@ -151,6 +156,7 @@ function App() {
             <Route path='/tickets' element={ <TicketsPage />} />
             <Route path='/add_employee' element={ <AddEmployee />} />
             <Route path='/messages' element={ <Messages />} />
+            <Route path='/calendar' element={<CalendarPage />} /> {/* Add the CalendarPage route */}
         </Routes>
     );
 }

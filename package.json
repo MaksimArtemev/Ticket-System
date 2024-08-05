@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/MaksimArtemev/Ticket-System/issues"
   },
-  "homepage": "https://github.com/MaksimArtemev/Ticket-System#readme"
+  "homepage": "https://github.com/MaksimArtemev/Ticket-System#readme",
+  "dependencies": {
+    "jwt-decode": "^4.0.0"
+  }
 }

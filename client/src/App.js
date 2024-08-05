@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import Main from './components/Main';
 import Signup from './components/Signup';
@@ -25,6 +25,7 @@ import './App.css';
 
 function MainPage() {
     const [open, setOpen] = useState(true);
+    const location = useLocation();
     const [showModal, setShowModal] = useState(false);
     const [showTickets, setShowTickets] = useState(false);
     const [userName, setUserName] = useState('');
@@ -104,19 +105,20 @@ function MainPage() {
                     </h1>
                 </div>
                 <ul className="pt-6">
-                    {Menus.map((Menu, index) => (
-                        <li
-                            key={index}
-                            className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
-                                ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 && "bg-light-white"} `}
-                            onClick={Menu.onClick ? Menu.onClick : null}
-                        >
-                            {Menu.src && <img src={Menu.src} />}
-                            <span className={`${!open && "hidden"} origin-left duration-200`}>
-                                {Menu.title}
-                            </span>
-                        </li>
-                    ))}
+    {Menus.map((Menu, index) => (
+        <li
+            key={index}
+            className={`flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
+                ${Menu.gap ? "mt-9" : "mt-2"} 
+                ${location.pathname === Menu.path ? "bg-light-white" : ""}`}
+            onClick={Menu.onClick ? Menu.onClick : () => navigate(Menu.path)}
+        >
+            {Menu.src && <img src={Menu.src} />}
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
+                {Menu.title}
+            </span>
+        </li>
+            ))}
                 </ul>
             </div>
             <div className="h-screen flex-1 p-7">

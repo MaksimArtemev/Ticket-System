@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import TicketsTable from './TicketsTable';
 
 const TicketsPage = ({ onRowClick }) => {
@@ -16,7 +17,7 @@ const TicketsPage = ({ onRowClick }) => {
 
                 console.log('Fetching tickets with token:', token);
 
-                const response = await fetch('http://localhost:4000/api/tickets/user-tickets', {
+                const response = await axios.get('http://localhost:4000/api/tickets/user-tickets', {
                     headers: {
                         'x-auth-token': token,
                     },
@@ -24,19 +25,18 @@ const TicketsPage = ({ onRowClick }) => {
 
                 console.log('Response Status:', response.status);
 
-                if (!response.ok) {
+                if (response.status !== 200) {
                     const errorResponse = await response.json();
                     console.error('Error Response:', errorResponse);
-                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorResponse.message}, stack: ${errorResponse.stack}`);
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorResponse.message}`);
                 }
 
-                const data = await response.json();
+                const data = response.data;
                 console.log('Fetched Tickets:', data);
                 setTickets(data);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching tickets:', error.message);
-                console.error('Error stack:', error.stack);
                 setLoading(false);
             }
         };

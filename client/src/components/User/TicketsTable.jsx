@@ -63,12 +63,12 @@ const TicketsTable = ({ tickets, onRowClick }) => {
                     },
                 }}
             >
-                <DataGrid 
-                    checkboxSelection 
-                    rows={tickets} 
-                    columns={columns} 
-                    getRowId={(row) => row._id} 
-                    onRowClick={onRowClick} 
+                <DataGrid
+                    checkboxSelection
+                    rows={tickets}
+                    columns={columns}
+                    getRowId={(row) => row._id}
+                    onRowClick={(params) => onRowClick(params.row)}
                 />
             </Box>
         </Box>

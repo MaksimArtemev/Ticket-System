@@ -5,8 +5,8 @@ import Main from './components/Main';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import TicketCreationForm from './components/TicketCreation/TicketCreationForm';
-import TicketsTable from './components/Employee/TicketsEmployeeTable';
-import TicketsPageAdmin from './components/Admin/TicketsPageAdmin';
+import Messages from './components/Messages/Messages'
+import AddEmployee from './components/AddEmployee/AddEmployee';
 import TicketEditForm from './components/Admin/AdminTicketEditForm';
 import TicketsPage from './components/User/TicketsPage';
 import chartFillImg from './assets/Chart_fill.png';
@@ -27,12 +27,15 @@ function MainPage() {
     const [showModal, setShowModal] = useState(false);
     const [showTickets, setShowTickets] = useState(false);
     const [userName, setUserName] = useState('');
+    const [userRole, setUserRole] = useState('');
     const navigate = useNavigate();
     const [selectedTicket, setSelectedTicket] = useState({});
     const [showEditForm, setShowEditForm] = useState(false);
+
     const handleTicketEditFormClose = (e) => {
-        if  (e.target.id === "close-ticketEdit-container") setShowEditForm(false);
-    }; 
+        if (e.target.id === "close-ticketEdit-container") setShowEditForm(false);
+    };
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -40,47 +43,55 @@ function MainPage() {
             console.log("Decoded Token:", decodedToken); // Log the decoded token
             if (decodedToken.firstName && decodedToken.lastName) {
                 setUserName(`${decodedToken.firstName} ${decodedToken.lastName}`);
+                setUserRole(decodedToken.role); // Set the user role
             } else {
                 setUserName("User"); // Fallback if the token does not have the required fields
             }
         }
     }, []);
 
-
     const handleModalClose = (e) => {
-        if  (e.target.id === "close-modal-container") setShowModal(false);;
+        if (e.target.id === "close-modal-container") setShowModal(false);
     };
 
-    const handleRowClick = (params, event, details) => {
-        setShowEditForm(true)
-        setSelectedTicket({
-            ticketID: params.row.id,
-            userID: params.row.userID,
-            type: params.row.type,
-        })
+    const handleRowClick = (ticket) => {
+        if (userRole === 'admin' || userRole === 'employee') {
+            setShowEditForm(true);
+            setSelectedTicket(ticket);
+        } else {
+            console.log("You can't edit the ticekt");
+        }
     };
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/login');
     };
-    
-    const createTicketButton = <button onClick={ ()  => setShowModal(true)} className="w-full">create ticket</button>;
 
-    const viewTicketsButton = <button onClick ={ () => setShowTickets(true)}>Tickets in Calendar</button>
+    const addEmployee = () => {
+        navigate('/add_employee');
+    };
+
+    const goToMessages = () => {
+        navigate('/messages');
+    };
+
+    const createTicketButton = <button onClick={() => setShowModal(true)} className="w-full">create ticket</button>;
+    const viewTicketsButton = <button onClick={() => setShowTickets(true)}>Tickets in Calendar</button>;
 
     const Menus = [
         { title: "Dashboard", src: chartFillImg },
-        { title: "Messages", src: chatImg },
+        { title: "Messages", src: chatImg, onClick: goToMessages },
         { title: userName, src: userImg, gap: true },
-        { title: viewTicketsButton, src: calendarImg },
+        userRole === 'admin' && { title: viewTicketsButton, src: calendarImg },
         { title: "Search", src: searchImg },
         { title: "Ticket Analytics", src: chartImg },
         { title: "Files ", src: folderImg, gap: true },
         { title: "Setting", src: settingImg },
         { title: createTicketButton, src: plusImg },
-        { title: "Logout", src: null, onClick: handleLogout } // Adding Logout button
-    ];
+        userRole === 'admin' && { title: "Add Employee", src: null, onClick: addEmployee }, // Conditionally add the Add Employee button
+        { title: "Logout", src: null, onClick: handleLogout },
+    ].filter(Boolean); // Filter out false values
 
     return (
         <div className="flex">
@@ -119,10 +130,10 @@ function MainPage() {
             </div>
             <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Main Page</h1>
-                <TicketsPage onRowClick={ handleRowClick }/>
+                <TicketsPage onRowClick={handleRowClick} />
             </div>
             <TicketCreationForm onClose={handleModalClose} visible={showModal} />
-            <TicketEditForm onClose={handleTicketEditFormClose} visible={showEditForm} ticket={selectedTicket}/>
+            <TicketEditForm onClose={handleTicketEditFormClose} visible={showEditForm} ticket={selectedTicket} />
         </div>
     );
 }
@@ -138,6 +149,8 @@ function App() {
             <Route path="/" element={<Navigate replace to="/login" />} />
             <Route path="/main" element={<MainPage />} />
             <Route path='/tickets' element={ <TicketsPage />} />
+            <Route path='/add_employee' element={ <AddEmployee />} />
+            <Route path='/messages' element={ <Messages />} />
         </Routes>
     );
 }

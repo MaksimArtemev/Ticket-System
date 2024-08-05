@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const auth = require('../MiddleWare/authMiddleware');
 const Ticket = require('../models/ticketModel');
 
+
 // Middleware to check if user is an admin
 const checkAdmin = async (req, res, next) => {
   const user = await User.findById(req.user._id);
@@ -39,11 +40,20 @@ router.post('/create-employee', auth, checkAdmin, async (req, res) => {
 
 // Delete Employee Account
 router.delete('/delete-employee/:id', auth, checkAdmin, async (req, res) => {
-  const user = await User.findByIdAndRemove(req.params.id);
-  if (!user) return res.status(404).send('User not found.');
-  res.send(user);
+    try {
+        console.log(`Attempting to delete user with id: ${req.params.id}`); // Log the attempt to delete
+        const user = await User.findByIdAndDelete(req.params.id);
+        if (!user) {
+            console.error('User not found with id:', req.params.id); // Log if user is not found
+            return res.status(404).send('User not found.');
+        }
+        console.log('User deleted:', user); // Log the deleted user
+        res.send(user);
+    } catch (error) {
+        console.error('Error deleting employee:', error); // Detailed error log
+        res.status(500).send('Error deleting employee');
+    }
 });
-
 // View All Tickets
 router.get('/all-tickets', auth, checkAdmin, async (req, res) => {
   try {
@@ -103,6 +113,16 @@ router.post('/add-employee', auth, checkAdmin, async (req, res) => {
     res.status(500).send('Error adding employee');
   }
 });
+
+router.get('/all-employees', auth, checkAdmin, async (req, res) => {
+    try {
+      const employees = await User.find({ role: 'employee' });
+      res.send(employees);
+    } catch (error) {
+      res.status(500).send('Error fetching employees');
+    }
+  });
+
 
 // Update Ticket Status
 router.put('/update-ticket-status/:ticketId', auth, async (req, res) => {

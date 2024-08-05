@@ -6,7 +6,8 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import TicketCreationForm from './components/TicketCreation/TicketCreationForm';
 import Messages from './components/Messages/Messages'
-import AddEmployee from './components/AddEmployee/AddEmployee';
+import ManageEmployee from './components/ManageEmployee/ManageEmployee';
+
 import TicketEditForm from './components/Admin/AdminTicketEditForm';
 import TicketsPage from './components/User/TicketsPage';
 import CalendarPage from './components/Calendar/CalendarPage';
@@ -70,9 +71,10 @@ function MainPage() {
     };
 
     const addEmployee = () => {
-        navigate('/add_employee');
+        navigate('/manage_employees');
     };
-
+ 
+    
     const goToMessages = () => {
         navigate('/messages');
     };
@@ -94,7 +96,7 @@ function MainPage() {
         { title: "Files ", src: folderImg, gap: true },
         { title: "Setting", src: settingImg },
         { title: createTicketButton, src: plusImg },
-        userRole === 'admin' && { title: "Add Employee", src: null, onClick: addEmployee }, // Conditionally add the Add Employee button
+        userRole === 'admin' && { title: "Manage Employees", src: null, onClick: addEmployee }, // Conditionally add the Add Employee button
         { title: "Logout", src: null, onClick: handleLogout },
     ].filter(Boolean); // Filter out false values
 
@@ -154,7 +156,7 @@ function App() {
             <Route path="/" element={<Navigate replace to="/login" />} />
             <Route path="/main" element={<MainPage />} />
             <Route path='/tickets' element={ <TicketsPage />} />
-            <Route path='/add_employee' element={ <AddEmployee />} />
+            <Route path='/manage_employees' element={ <ManageEmployee />} />
             <Route path='/messages' element={ <Messages />} />
             <Route path='/calendar' element={<CalendarPage />} /> {/* Add the CalendarPage route */}
         </Routes>

@@ -30,6 +30,7 @@ const TicketsTable = ({ tickets, onRowClick }) => {
             field: "status",
             headerName: "Status",
         },
+
     ];
 
     return (

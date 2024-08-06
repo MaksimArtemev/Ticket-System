@@ -8,7 +8,7 @@ import TicketCreationForm from './components/TicketCreation/TicketCreationForm';
 import Messages from './components/Messages/Messages'
 import ManageEmployee from './components/ManageEmployee/ManageEmployee';
 
-import TicketEditForm from './components/Admin/AdminTicketEditForm';
+import TicketEditForm from './components/Admin/AdminTicketEditForm'; // Ensure this import is correct
 import TicketsPage from './components/User/TicketsPage';
 import CalendarPage from './components/Calendar/CalendarPage';
 import chartFillImg from './assets/Chart_fill.png';
@@ -33,9 +33,12 @@ function MainPage() {
     const navigate = useNavigate();
     const [selectedTicket, setSelectedTicket] = useState({});
     const [showEditForm, setShowEditForm] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
-    const handleTicketEditFormClose = (e) => {
-        if (e.target.id === "close-ticketEdit-container") setShowEditForm(false);
+     const handleTicketEditFormClose = (e) => {
+        if (e.target.id === "close-ticketEdit-container" || e.target.className === "close") {
+            setShowEditForm(false);
+        }
     };
 
     useEffect(() => {
@@ -46,6 +49,7 @@ function MainPage() {
             if (decodedToken.firstName && decodedToken.lastName) {
                 setUserName(`${decodedToken.firstName} ${decodedToken.lastName}`);
                 setUserRole(decodedToken.role); // Set the user role
+                setIsAdmin(decodedToken.role === 'admin'); // Set isAdmin based on the role
             } else {
                 setUserName("User"); // Fallback if the token does not have the required fields
             }
@@ -61,7 +65,7 @@ function MainPage() {
             setShowEditForm(true);
             setSelectedTicket(ticket);
         } else {
-            console.log("You can't edit the ticekt");
+            console.log("You can't edit the ticket");
         }
     };
 
@@ -140,7 +144,7 @@ function MainPage() {
                 <TicketsPage onRowClick={handleRowClick} />
             </div>
             <TicketCreationForm onClose={handleModalClose} visible={showModal} />
-            <TicketEditForm onClose={handleTicketEditFormClose} visible={showEditForm} ticket={selectedTicket} />
+            <TicketEditForm onClose={handleTicketEditFormClose} visible={showEditForm} ticket={selectedTicket} isAdmin={isAdmin} /> {/* Pass isAdmin prop */}
         </div>
     );
 }

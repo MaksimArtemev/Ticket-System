@@ -66,14 +66,34 @@ router.get('/all-tickets', auth, checkAdmin, async (req, res) => {
 
 // Assign Employee to Ticket
 router.put('/assign-ticket/:ticketId', auth, checkAdmin, async (req, res) => {
-  const ticket = await Ticket.findByIdAndUpdate(
-    req.params.ticketId,
-    { assignedEmployee: req.body.employeeId },
-    { new: true }
-  );
-  if (!ticket) return res.status(404).send('Ticket not found.');
-  res.send(ticket);
-});
+    try {
+      const employee = await User.findById(req.body.employeeId);
+      if (!employee) {
+        return res.status(404).send('Employee not found.');
+      }
+  
+      const ticket = await Ticket.findById(req.params.ticketId);
+      if (!ticket) {
+        return res.status(404).send('Ticket not found.');
+      }
+  
+      ticket.assignedEmployee = {
+        _id: employee._id,
+        firstName: employee.firstName,
+        lastName: employee.lastName
+      };
+  
+      await ticket.save();
+  
+      res.send(ticket);
+    } catch (error) {
+      console.error('Error assigning employee to ticket:', error);
+      res.status(500).send('Error assigning employee to ticket');
+    }
+  });
+  
+  
+  
 
 // Override Ticket Assignment
 router.put('/override-ticket/:ticketId', auth, checkAdmin, async (req, res) => {
@@ -124,17 +144,21 @@ router.get('/all-employees', auth, checkAdmin, async (req, res) => {
   });
 
 
-// Update Ticket Status
-router.put('/update-ticket-status/:ticketId', auth, async (req, res) => {
-    const { status } = req.body;
+  router.put('/update-ticket-status/:ticketId', auth, async (req, res) => {
+    const { status, assignedEmployee } = req.body;
     const { ticketId } = req.params;
 
     console.log(`Received ticketId: ${ticketId}`);
 
     try {
+        const updateData = { status };
+        if (assignedEmployee) {
+            updateData.assignedEmployee = assignedEmployee;
+        }
+
         const ticket = await Ticket.findByIdAndUpdate(
             ticketId,
-            { status },
+            updateData,
             { new: true }
         );
 
@@ -146,6 +170,9 @@ router.put('/update-ticket-status/:ticketId', auth, async (req, res) => {
         res.status(500).send('Error updating ticket status');
     }
 });
+
+
+
 
 
 module.exports = router;

@@ -18,6 +18,11 @@ router.post('/', auth, upload.array('files'), async (req, res) => {
       subject,
       description,
       files,
+      assignedEmployee: {
+        _id: null,
+        firstName: 'Not declared',
+        lastName: ''
+      }
     });
     res.status(201).json({ ticketID: newTicket.id });
   } catch (error) {

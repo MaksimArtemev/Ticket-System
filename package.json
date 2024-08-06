@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/MaksimArtemev/Ticket-System/issues"
   },
-  "homepage": "https://github.com/MaksimArtemev/Ticket-System#readme"
+  "homepage": "https://github.com/MaksimArtemev/Ticket-System#readme",
+  "dependencies": {
+    "react-redux": "^9.1.2",
+    "redux": "^5.0.1"
+  }
 }

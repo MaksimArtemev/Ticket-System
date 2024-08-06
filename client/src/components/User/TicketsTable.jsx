@@ -1,5 +1,4 @@
-import React from 'react';
-import { Box, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../theme";
 
@@ -14,10 +13,13 @@ const TicketsTable = ({ tickets, onRowClick }) => {
             headerName: "Type",
         },
         {
+            field: "role",
+            headerName: "Role", // Adding Role here
+        },
+        {
             field: "subject",
             headerName: "Subject",
             flex: 1,
-            //cellClassName: "name-column--cell",
         },
         {
             field: "description",
@@ -28,6 +30,7 @@ const TicketsTable = ({ tickets, onRowClick }) => {
             field: "status",
             headerName: "Status",
         },
+
     ];
 
     return (
@@ -61,12 +64,12 @@ const TicketsTable = ({ tickets, onRowClick }) => {
                     },
                 }}
             >
-                <DataGrid 
-                    checkboxSelection 
-                    rows={tickets} 
-                    columns={columns} 
-                    getRowId={(row) => row._id} 
-                    onRowClick={onRowClick} 
+                <DataGrid
+                    checkboxSelection
+                    rows={tickets}
+                    columns={columns}
+                    getRowId={(row) => row._id}
+                    onRowClick={(params) => onRowClick(params.row)}
                 />
             </Box>
         </Box>

@@ -1,0 +1,77 @@
+.manage-employee-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.manage-employee-container h1,
+.manage-employee-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.manage-employee-container .error-msg {
+    color: red;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.manage-employee-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.manage-employee-container form input {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.manage-employee-container form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.manage-employee-container form button:hover {
+    background-color: #0056b3;
+}
+
+.employee-list-container {
+    margin-top: 20px;
+}
+
+.employee-list-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.employee-list-container li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.employee-list-container li button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #dc3545;
+    color: white;
+    cursor: pointer;
+}
+
+.employee-list-container li button:hover {
+    background-color: #c82333;
+}

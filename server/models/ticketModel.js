@@ -1,4 +1,3 @@
-// models/Ticket.js
 const mongoose = require('mongoose');
 
 const ticketSchema = new mongoose.Schema({
@@ -8,7 +7,12 @@ const ticketSchema = new mongoose.Schema({
   description: { type: String, required: true },
   files: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now },
-  status: { type: String, default: 'open' }
+  status: { type: String, default: 'open' },
+  assignedEmployee: {
+    _id: { type: mongoose.Schema.Types.ObjectId, default: null },
+    firstName: { type: String, default: 'Not declared' },
+    lastName: { type: String, default: '' }
+  }
 });
 
 const Ticket = mongoose.model('Ticket', ticketSchema);

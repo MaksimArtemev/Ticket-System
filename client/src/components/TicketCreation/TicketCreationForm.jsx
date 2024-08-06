@@ -14,6 +14,7 @@ export default function TicketCreationForm({ visible, onClose }) {
   const [description, setDescription] = useState('');
   const [files, setFiles] = useState([]);
   const [filePreviews, setFilePreviews] = useState([]);
+  
 
   const ticketTopics = [
     { topic: "Repair", desc: "Issues related to hardware or software repairs. Please describe the problem and any relevant details.", icon: ticketIssue5 },

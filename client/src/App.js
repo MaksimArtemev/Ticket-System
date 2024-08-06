@@ -30,11 +30,7 @@ function MainPage() {
     const [showEditForm, setShowEditForm] = useState(false);
     const [showTickets, setShowTickets] = useState(false);
     const [userName, setUserName] = useState('');
-<<<<<<< HEAD
-    const [selectedTicket, setSelectedTicket] = useState({});
-=======
     const [userRole, setUserRole] = useState('');
->>>>>>> main
     const navigate = useNavigate();
     const [selectedTicket, setSelectedTicket] = useState({});
     const [showEditForm, setShowEditForm] = useState(false);
@@ -62,15 +58,8 @@ function MainPage() {
     }, []);
 
     const handleModalClose = (e) => {
-<<<<<<< HEAD
-        if  (e.target.id === "close-modal-container") setShowModal(false);
-    };
 
-    const handleTicketEditFormClose = (e) => {
-        if  (e.target.id === "close-ticketEdit-container") setShowEditForm(false);
-=======
         if (e.target.id === "close-modal-container") setShowModal(false);
->>>>>>> main
     };
 
     const handleRowClick = (ticket) => {
@@ -92,10 +81,7 @@ function MainPage() {
     };
  
     
-<<<<<<< HEAD
-    
-    const createTicketButton = <button onClick={ ()  => setShowModal(true)} className="w-full">create ticket</button>;
-=======
+
     const goToMessages = () => {
         navigate('/messages');
     };
@@ -103,7 +89,7 @@ function MainPage() {
     const goToCalendar = () => {
         navigate('/calendar');
     };
->>>>>>> main
+
 
     const createTicketButton = <button onClick={() => setShowModal(true)} className="w-full">create ticket</button>;
     const viewTicketsButton = <button onClick={() => setShowTickets(true)}>Tickets in Calendar</button>;
@@ -159,18 +145,10 @@ function MainPage() {
             </div>
             <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Main Page</h1>
-<<<<<<< HEAD
-                <TicketsPageAdmin onRowClick={ handleRowClick }/>
-            </div>
-            <TicketCreationForm onClose={handleModalClose} visible={showModal} />
-            <TicketEditForm onClose={handleTicketEditFormClose} visible={showEditForm} ticket={selectedTicket}/>
-            <TicketEditForm onClose={handleTicketEditFormClose} visible={showEditForm} ticket={selectedTicket}/>
-=======
                 <TicketsPage onRowClick={handleRowClick} />
             </div>
             <TicketCreationForm onClose={handleModalClose} visible={showModal} />
             <TicketEditForm onClose={handleTicketEditFormClose} visible={showEditForm} ticket={selectedTicket} isAdmin={isAdmin} /> {/* Pass isAdmin prop */}
->>>>>>> main
         </div>
     );
 }
@@ -185,14 +163,10 @@ function App() {
             <Route path="/login" exact element={<Login />} />
             <Route path="/" element={<Navigate replace to="/login" />} />
             <Route path="/main" element={<MainPage />} />
-<<<<<<< HEAD
-            <Route path='/tickets' element={ <TicketCreationForm visible={true} />} />
-=======
             <Route path='/tickets' element={ <TicketsPage />} />
             <Route path='/manage_employees' element={ <ManageEmployee />} />
             <Route path='/messages' element={ <Messages />} />
             <Route path='/calendar' element={<CalendarPage />} /> {/* Add the CalendarPage route */}
->>>>>>> main
         </Routes>
     );
 }

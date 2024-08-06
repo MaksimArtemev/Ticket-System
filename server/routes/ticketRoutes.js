@@ -33,26 +33,31 @@ router.post('/', auth, upload.array('files'), async (req, res) => {
 
 router.get('/user-tickets', auth, async (req, res) => {
     try {
-      const user = await User.findById(req.user._id);
-      if (!user) {
-        console.error('User not found for ID:', req.user._id);
-        return res.status(404).json({ message: 'User not found' });
-      }
-  
-      let tickets;
-      if (user.role === 'admin') {
-        tickets = await Ticket.find(); // Fetch all tickets if the user is an admin
-      } else {
-        tickets = await Ticket.find({ userId: req.user._id }); // Fetch only the user's tickets
-      }
-  
-      res.status(200).json(tickets);
+        const user = await User.findById(req.user._id);
+        if (!user) {
+            console.error('User not found for ID:', req.user._id);
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        let tickets;
+        if (user.role === 'admin') {
+            tickets = await Ticket.find(); // Fetch all tickets if the user is an admin
+        } else {
+            tickets = await Ticket.find({
+                $or: [
+                    { userId: req.user._id },
+                    { 'assignedEmployee._id': req.user._id }
+                ]
+            }); // Fetch only the user's tickets or tickets assigned to the user
+        }
+
+        res.status(200).json(tickets);
     } catch (error) {
-      console.error('Error fetching tickets:', error.message);
-      console.error('Error stack:', error.stack);
-      res.status(500).json({ message: 'Error fetching tickets', error: error.message, stack: error.stack });
+        console.error('Error fetching tickets:', error.message);
+        console.error('Error stack:', error.stack);
+        res.status(500).json({ message: 'Error fetching tickets', error: error.message, stack: error.stack });
     }
-  });
-  
+});
+
 
 module.exports = router;

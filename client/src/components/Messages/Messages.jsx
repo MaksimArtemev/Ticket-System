@@ -34,8 +34,7 @@ const Messages = () => {
                 localStorage.setItem('userId', userId);
                 console.log('User ID set in local storage:', userId);
             } catch (err) {
-                console.error('Failed to fetch user ID:', err);
-                setError('Failed to fetch user ID.');
+               
             }
         };
 
@@ -83,7 +82,7 @@ const Messages = () => {
             console.log('Message sent successfully');
         } catch (err) {
             console.error('Failed to send message:', err);
-            setError('Failed to send message.');
+           
         }
     };
 

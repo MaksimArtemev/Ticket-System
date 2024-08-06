@@ -17,12 +17,12 @@ export default function TicketCreationForm({ visible, onClose }) {
   
 
   const ticketTopics = [
-    { topic: "Repair", desc: "Issues related to hardware or software repairs. Please describe the problem and any relevant details.", icon: ticketIssue5 },
-    { topic: "Account", desc: "Problems with your account, such as login issues, password resets, or account settings.", icon: ticketIssue2 },
-    { topic: "Product", desc: "Inquiries or problems related to products, including product defects, usage questions, or returns.", icon: ticketIssue4 },
-    { topic: "Billing", desc: "Questions or issues related to billing, such as incorrect charges, payment problems, or invoice requests.", icon: ticketIssue3 },
-    { topic: "Hardware", desc: "Issues specific to hardware components, such as malfunctioning devices, connectivity issues, or hardware upgrades.", icon: ticketIssue0 },
-    { topic: "Software", desc: "Software-related problems, including installation issues, bugs, or software updates.", icon: ticketIssue1 },
+    { topic: "Repair", desc: "Issues related to hardware or software repairs. Please describe the problem and any relevant details. This usually takes approximately 3-5 days to fix.", icon: ticketIssue5 },
+    { topic: "Account", desc: "Problems with your account, such as login issues, password resets, or account settings. This usually takes approximately 1-2 days to fix.", icon: ticketIssue2 },
+    { topic: "Product", desc: "Inquiries or problems related to products, including product defects, usage questions, or returns.This usually takes approximately 2-3 days to fix.", icon: ticketIssue4 },
+    { topic: "Billing", desc: "Questions or issues related to billing, such as incorrect charges, payment problems, or invoice requests. This usually takes approximately 1-2 days to fix.", icon: ticketIssue3 },
+    { topic: "Hardware", desc: "Issues specific to hardware components, such as malfunctioning devices, connectivity issues, or hardware upgrades. This usually takes approximately 3-5 days to fix.", icon: ticketIssue0 },
+    { topic: "Software", desc: "Software-related problems, including installation issues, bugs, or software updates. This usually takes approximately 1-4 days to fix.", icon: ticketIssue1 },
   ];
 
   const handleSubmit = async (event) => {

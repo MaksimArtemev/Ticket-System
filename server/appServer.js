@@ -6,6 +6,8 @@ const userRoutes = require('./routes/usersRoutes');
 const authRoutes = require('./routes/authRoutes');
 const ticketRoutes = require('./routes/ticketRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const employeeRoutes = require('./routes/employeeRoutes'); 
+const messageRoutes = require('./routes/messageRoutes');
 
 dotenv.config(); // Load environment variables
 
@@ -26,6 +28,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/tickets", ticketRoutes); 
 app.use("/api/admin", adminRoutes);
+app.use('/api/employee', employeeRoutes);
+app.use('/api/messages', messageRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`App is Listening on PORT ${PORT}`));

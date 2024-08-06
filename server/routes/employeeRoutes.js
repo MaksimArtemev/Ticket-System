@@ -1,16 +1,31 @@
 const express = require('express');
 const router = express.Router();
-const Ticket = require('../models/ticketModel');
 const auth = require('../MiddleWare/authMiddleware');
-const checkRoles = require('../MiddleWare/roleMiddleware');
+const Ticket = require('../models/ticketModel');
+const { User } = require("../models/userModel");
 
-router.get('/employee-tickets', [auth, checkRoles(['employee'])], async (req, res) => {
-  try {
-    const tickets = await Ticket.find();
-    res.status(200).json(tickets);
-  } catch (error) {
-    res.status(500).json({ message: 'Error fetching tickets', error });
-  }
+// Fetch assigned users for the logged-in employee
+router.get('/assigned-users', auth, async (req, res) => {
+    try {
+        console.log('Fetching assigned users for:', req.user._id);
+
+        // Ensuring the User model is referenced correctly
+        const tickets = await Ticket.find({ 'assignedEmployee._id': req.user._id }).populate({
+            path: 'userId',
+            model: User,
+            select: 'firstName lastName email'
+        });
+
+        console.log('Tickets found:', tickets);
+
+        const assignedUsers = tickets.map(ticket => ticket.userId);
+        console.log('Assigned users:', assignedUsers);
+
+        res.json(assignedUsers);
+    } catch (error) {
+        console.error('Failed to fetch assigned users:', error);
+        res.status(500).send('Failed to fetch assigned users');
+    }
 });
 
 module.exports = router;

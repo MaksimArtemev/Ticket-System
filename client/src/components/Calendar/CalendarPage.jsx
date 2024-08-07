@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import { Inject, ScheduleComponent, Day, Week, Month } from '@syncfusion/ej2-react-schedule';
+import { Inject, ScheduleComponent, Day, Week, Month, ViewsDirective, ViewDirective } from '@syncfusion/ej2-react-schedule';
 import '../../App.css';
 import logoImg from '../../assets/logo.png';
 import chartFillImg from '../../assets/Chart_fill.png';
@@ -11,7 +11,51 @@ import { registerLicense } from '@syncfusion/ej2-base';
 
 registerLicense('ORg4AjUWIQA/Gnt2U1hhQlJBfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hTX5bdkNhW31adXdST2Ra');
 
+const data = [
+    {
+        Id: 1, 
+        Subject: "Dave Dave hardware issue",
+        StartTime: new Date(2024, 7, 6, 10,0),
+        EndTime: new Date(2024, 7, 6, 12,0),
+        IsAllDay: false,
+    }, 
 
+    {
+        Id: 2,
+        Subject: "Bezos software issue",
+        StartTime: new Date(2024, 7, 6, 8,0),
+        EndTime: new Date(2024, 7, 6, 9,0),
+        IsAllDay: false,
+    },
+    {
+        Id: 3,
+        Subject: "Bezos billing issue",
+        StartTime: new Date(2024, 7, 7, 6,0),
+        EndTime: new Date(2024, 7, 7, 7,0),
+        IsAllDay: false,
+    },
+    {
+        Id: 4,
+        Subject: "Bezos product issue",
+        StartTime: new Date(2024, 7, 6, 1,0),
+        EndTime: new Date(2024, 7, 6, 2,0),
+        IsAllDay: false,
+    },
+    {
+        Id: 5,
+        Subject: "Dave Dave account issue",
+        StartTime: new Date(2024, 7, 8, 4,0),
+        EndTime: new Date(2024, 7, 8, 5,0),
+        IsAllDay: false,
+    },
+    {
+        Id: 6,
+        Subject: "Bezos software issue",
+        StartTime: new Date(2024, 7, 6, 2,0),
+        EndTime: new Date(2024, 7, 6, 4,0),
+        IsAllDay: false,
+    }
+];
 const CalendarPage = () => {
     const [open, setOpen] = useState(true);
     const navigate = useNavigate();
@@ -72,8 +116,16 @@ const CalendarPage = () => {
             </div>
             <div className="h-screen flex-1 p-7">
                 <h1 className="text-2xl font-semibold ">Calendar Page</h1>
-                {/* calendar component that i will hopefully get to make because it took forever to figure out how to get this sidebar on the page */}
-                <ScheduleComponent>
+                {/* calendar component */}
+                <ScheduleComponent eventSettings={{
+                    dataSource: data
+                }}>
+                    <ViewsDirective>
+                        <ViewDirective option="Day" />
+                        <ViewDirective option="Week" />
+                        <ViewDirective option="Month" />
+                    </ViewsDirective>
+
                     <Inject services={[Day, Week, Month]} />
                 </ScheduleComponent>
             </div>
